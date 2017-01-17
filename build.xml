@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. -->
+<project basedir="/home/ec2-user/.jenkins/jobs/kapmou/workspace/kapmou" name="kapmou">
+	 
+	<property name="project.name" value="kapmou" />
+	<property name="deploy.host" value="52.78.82.31" />
+	<property name="deploy.user" value="ec2-user" />
+	<property name="temp.deploy.dir" value="/home/ec2-user/tomcat/webapps/tempdir" />
+	
+	<property name="target.dir" value="${basedir}/build" />
+	<property name="web.dir" value="${basedir}/WebContent" />
+	<property name="output.dir" value="${web.dir}/WEB-INF/classes" />
+	<property name="lib.dir" value="${web.dir}/WEB-INF/lib" />
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="TOMCAT_HOME" value="/home/ec2-user/tomcat"/>
+	<property name="ANT_HOME" value="/usr/local/ant"/>
+	
+	<property name="debuglevel" value="source,lines,vars"/>
+	<property name="java.encoding" value="UTF-8" />
+	<property name="target" value="1.8"/>
+	<property name="source" value="1.8"/>
+	
+	<path id="Server Library [Apache Tomcat v7.0] (unbound).libraryclasspath"/>
+		
+	<path id="build.classpath">
+		<path refid="Server Library [Apache Tomcat v7.0] (unbound).libraryclasspath" />
+		<fileset dir="${lib.dir}" includes="**/*.jar" />
+		<pathelement location="${TOMCAT_HOME}/lib/servlet-api.jar"/>
+		<pathelement location="${TOMCAT_HOME}/lib/jasper.jar"/>
+		<pathelement location="${TOMCAT_HOME}/lib/jsp-api.jar"/>
+		<pathelement location="${TOMCAT_HOME}/lib/el-api.jar"/>
+		<pathelement location="${TOMCAT_HOME}/lib/annotations-api.jar"/>
+	</path>
+	
+	<target name="init">
+		<tstamp>
+			<format property="init.time" pattern="yyyyMMdd-HHmmss" />
+		</tstamp>
+		<mkdir dir="${output.dir}"/>  <!-- web/WEB-INF/classes -->
+		<mkdir dir="${target.dir}"/>
+	</target>
+	
+	<target name="build" depends="init">
+		<!-- multiple srcdir : src, sys -->
+		<javac debug="false" debuglevel="${debuglevel}" destdir="${output.dir}" includeantruntime="false"
+			source="${source}"  target="${target}" encoding="${java.encoding}" srcdir="${src.dir}">
+			<classpath refid="build.classpath"/>
+		</javac>
+		<copy includeemptydirs="true" todir="${output.dir}">
+			<fileset dir="${src.dir}">
+				<include name="com/koreaap/mouInfo/**/*.xml"/>
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="war" depends="build">
+		
+		<!-- replace configuration file for PRODUCTION server -->
+		<move includeemptydirs="false" todir="${web.dir}/WEB-INF">
+			<fileset dir="${web.dir}/WEB-INF"/>
+			<mapper type="glob" from="*.xml" to="*.xml"/> <!-- web.xml, logback.xml -->
+		</move>
+		
+	    <war destfile="${target.dir}/${project.name}.war" duplicate="fail">
+            <manifest>
+                <attribute name="Build-Date" value="${init.time}" />
+                <attribute name="Built-By" value="${project.name}" />
+                <attribute name="Implementation-Title" value="${project.name}" />
+                <attribute name="Implementation-Version" value="" />
+                <attribute name="Implementation-Vendor" value="KAP Co.Ltd." />
+                <attribute name="Specification-Title" value="${project.name}" />
+                <attribute name="Specification-Version" value="2017" />
+                <attribute name="Specification-Vendor" value="KAP Co.Ltd." />
+            </manifest>
+	    	<fileset dir="${web.dir}">
+	        </fileset>
+	    </war>
+    </target>
+	
+	<taskdef name="ssh" classname="com.sshtools.ant.Ssh" classpath="${ANT_HOME}/lib/maverick-ant.jar"/>
+	
+	<target name="deploy-server-prod" depends="war" description="deploy server">
+		<ssh host="${deploy.host}" username="${deploy.user}" password="" port="22" version="2">
+			<sftp action="put" remotedir="${temp.deploy.dir}" verbose="true">
+				<fileset dir="${target.dir}">
+					<include name="${project.name}.war" />
+				</fileset>
+			</sftp>
+			<exec cmd="${temp.deploy.dir}/build.sh > ${temp.deploy.dir}/build_result.txt" />
+			<!-- build.sh : 
+			
+				cd /home/ec2-user/tomcat/webapps/tempdir
+
+				mv kapmou.war /home/ec2-user/tomcat_kap/webapps
+				
+				cd /home/ec2-user/tomcat_kap/bin
+				
+				./shutdown.sh
+				
+				sleep 10
+				
+				./startup.sh
+
+
+			-->
+		</ssh>
+	</target>
+	
+</project>

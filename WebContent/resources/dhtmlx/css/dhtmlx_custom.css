@@ -1,0 +1,115 @@
+/* grid header row text-align : left => center */
+div.gridbox_dhx_terrace table.hdr td {
+	text-align:center;
+	background-color: #406379;
+	border-right: 1px solid #ababab;
+	border-bottom: 1px solid #ababab;
+	vertical-align: middle;
+}
+
+/* grid header row padding left : 20 => 0 */
+div.gridbox_dhx_terrace table.hdr td div.hdrcell {
+	padding-left:0px;
+	background-color: #406379;
+	color: #fff;
+}
+
+/* grid header row padding left : 20 => 0 */
+div.gridbox_dhx_terrace table.obj tr  td.editable {
+	padding-left:0px;
+}
+
+/* grid row padding left, right : 20 => 0 */
+div.gridbox_dhx_terrace table.obj tr td {
+	padding-right:0px;
+	padding-left:0px;
+}
+
+div.gridbox_dhx_terrace .odd_dhx_terrace {
+/* 	background-color: #D5D5D1; */
+}
+
+div.gridbox_dhx_terrace .xhdr {
+	background-color: #406379;
+}
+
+/* combo input text border none */
+.dhx_combo_box.dhx_terrace .dhx_combo_input  {
+	border: none;
+}
+
+/* custom 추가 (combo) */
+
+.dhx_combo_box.dhx_terrace .dhx_combo_img{
+	height:20px;
+}
+.dhx_combo_box.dhx_terrace{
+	height:20px;
+	line-height:18px;
+	_height:22px;
+	padding:1px;
+}
+.dhx_combo_box.dhx_terrace .dhx_combo_img_rtl{
+	height:20px;
+}
+
+.dhx_combo_list.dhx_terrace_list div{
+	cursor:default;
+	padding:2px 8px;
+}
+.dhx_combo_list.dhx_terrace_list{
+	background-color: white;
+	border:1px solid #CECECE;
+	font-family:Arial;
+	font-size: 12px;
+}
+.dhx_combo_list_rtl.dhx_terrace_list{
+   background-color: white;
+	border:1px solid #CECECE;
+	font-family:Arial;
+	font-size: 12px;
+}
+.dhx_combo_box.dhx_terrace .dhx_combo_input {
+    height:20px;
+    line-height:18px;
+	font-family:Arial;
+	font-size: 12px;
+	padding:0px 0px 0px 8px;
+	background-color: #fff;
+	cursor: pointer;
+}
+
+/* custom 추가 (grid) */
+
+div.gridbox_dhx_terrace {
+/* 	border-bottom-width: 2px; */
+}
+
+div.gridbox_dhx_terrace table.hdr td div.hdrcell{
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	width:auto;
+	line-height:27px;
+	text-transform:uppercase;
+	width:100% !ie;
+}
+
+div.gridbox_dhx_terrace table.obj.row20px tr td{
+	padding: 1px 3px 0px 3px;
+    height:25px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+div.gridbox_dhx_terrace table.obj tr td {
+	border-width: 0px 1px 1px 0px;
+}
+
+/* dhtmlx grid 내 table 속성 수정 (가로 스크롤바 이동 시 헤더가 따로 움직이는 현상 방지)
+   셀 간 겹치는 border 를 겹치지 않도록 수정함 */
+.xhdr table { border-collapse : separate; }  
+
+div.gridbox {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}

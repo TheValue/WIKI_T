@@ -1,0 +1,49 @@
+body > .container {
+	padding-top: 60px;
+}
+
+.navbar-inverse {
+	background: #205081;
+}
+
+.navbar-inverse .navbar-brand {
+	color: #ece7e7;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+	color: #ece7e7;
+}
+
+.chartArea {
+	height: 350px; 
+	border: 1px solid #d4d0d0;
+}
+
+.container-main {
+	border-left: 1px solid #d4d0d0;
+	border-right: 1px solid #d4d0d0;
+	border-bottom: 1px solid #d4d0d0;
+}
+
+p > .bg-info, .commTag {
+	margin: 6px 0px 3px 0px;
+	padding: 0px 0px 0px 5px;
+	color: #427597;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.col-md-12, .col-md-6 {
+	padding-left: 1px;
+	padding-right: 1px;
+}
+
+.panel-body, .panel-heading {
+	padding: 5px 15px;
+}
+
+.btmTag {
+	padding: 5px;
+	color: #807c7c;
+	font-size: 12px;
+}
