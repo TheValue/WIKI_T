@@ -14,13 +14,13 @@
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li>
-					<a href="/">Home</a>
+					<a href="#/">Home</a>
 				</li>
 				<li>
-					<a href="home">HighChart Ex</a>
+					<a href="#/aaa">HighChart Ex</a>
 				</li>
 				<li>
-					<a href="test">test</a>
+					<a href="#/login.do">Login</a>
 				</li>
 			</ul>
 		</div>

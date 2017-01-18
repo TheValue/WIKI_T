@@ -1,5 +1,6 @@
 var Config = {
 	
-	CONTEXT_PATH : ""
+	CONTEXT_PATH : "",
+	SHA256_SALT: "{WIKITESTPROJECT}"
 	
 };
